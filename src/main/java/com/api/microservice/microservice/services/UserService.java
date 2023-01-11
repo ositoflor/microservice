@@ -1,7 +1,7 @@
 package com.api.microservice.microservice.services;
 
 import com.api.microservice.microservice.clients.UserClient;
-import com.api.microservice.microservice.config.JwtToken;
+import com.api.microservice.microservice.jwt.JwtToken;
 import com.api.microservice.microservice.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
