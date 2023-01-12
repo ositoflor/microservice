@@ -1,6 +1,6 @@
 package com.api.microservice.microservice.services;
 
-import com.api.microservice.microservice.clients.UserClient;
+import com.api.microservice.microservice.dtos.TokenDto;
 import com.api.microservice.microservice.jwt.JwtToken;
 import com.api.microservice.microservice.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +11,17 @@ public class UserService {
     @Autowired
     JwtToken jwtToken;
 
-    @Autowired
-    UserClient userClient;
-
-
-
-    public Object getUsers() {
-        return userClient.getAllUsers();
+    public TokenDto loginUser(UserDto userDto) {
+       String token = jwtToken.generateToken(userDto);
+       return TokenDto.builder().type("Bearer").token(token).build();
     }
 
-    public String loginUser(String email, String password) {
-        UserDto user = userClient.loginUser(email,password);
+    public boolean validateToken(String token) {
+        System.out.print(token);
+      return jwtToken.tokenValid(token);
+    }
 
-        if (user.getTypeUser().equalsIgnoreCase("ADMIN")){
-            return jwtToken.generateToken(user.getEmail());
-        }
-        return "não passou";
+    public String getTypeUser(String token) {
+        return jwtToken.typeUser(token);
     }
 }
