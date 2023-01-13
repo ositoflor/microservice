@@ -1,13 +1,8 @@
-package com.api.microservice.microservice.controllers;
+package com.api.microservice.microservice.aplication.controllers;
 
-import com.api.microservice.microservice.dtos.LoginDto;
-import com.api.microservice.microservice.dtos.TokenDto;
-import com.api.microservice.microservice.dtos.UserDto;
 import com.api.microservice.microservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +11,6 @@ public class TokenController {
 
     @Autowired
     UserService userService;
-
-
-    @PostMapping
-    public ResponseEntity<TokenDto> loginUser(@RequestBody LoginDto loginDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.loginUser(loginDto));
-    }
-
 
     @GetMapping(value = "/validatetoken")
     public boolean validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {

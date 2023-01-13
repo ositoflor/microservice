@@ -1,7 +1,7 @@
-package com.api.microservice.microservice.clients;
+package com.api.microservice.microservice.infra.clients;
 
-import com.api.microservice.microservice.dtos.LoginDto;
-import com.api.microservice.microservice.dtos.UserDto;
+import com.api.microservice.microservice.domain.Login;
+import com.api.microservice.microservice.domain.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserClient {
 
     @PostMapping(value = "/login")
-    UserDto loginUser(@RequestBody LoginDto loginDto);
+    User loginUser(@RequestBody Login loginDto);
 
 }

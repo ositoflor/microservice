@@ -1,10 +1,10 @@
 package com.api.microservice.microservice.services;
 
-import com.api.microservice.microservice.clients.UserClient;
-import com.api.microservice.microservice.dtos.LoginDto;
-import com.api.microservice.microservice.dtos.TokenDto;
-import com.api.microservice.microservice.jwt.JwtToken;
-import com.api.microservice.microservice.dtos.UserDto;
+import com.api.microservice.microservice.infra.clients.UserClient;
+import com.api.microservice.microservice.domain.Login;
+import com.api.microservice.microservice.services.dto.TokenDto;
+import com.api.microservice.microservice.services.jwt.JwtToken;
+import com.api.microservice.microservice.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     UserClient userClient;
 
-    public TokenDto loginUser(LoginDto loginDto) {
-       UserDto user = userClient.loginUser(loginDto);
+    public TokenDto loginUser(Login loginDto) {
+       User user = userClient.loginUser(loginDto);
        if (user == null) {
            throw new RuntimeException("Usuário inválido");
        }

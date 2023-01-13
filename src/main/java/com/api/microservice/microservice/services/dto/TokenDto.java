@@ -1,4 +1,4 @@
-package com.api.microservice.microservice.dtos;
+package com.api.microservice.microservice.services.dto;
 
 import lombok.Builder;
 import lombok.Data;

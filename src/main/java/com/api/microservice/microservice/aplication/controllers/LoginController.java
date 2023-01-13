@@ -1,7 +1,7 @@
-package com.api.microservice.microservice.controllers;
+package com.api.microservice.microservice.aplication.controllers;
 
-import com.api.microservice.microservice.dtos.LoginDto;
-import com.api.microservice.microservice.dtos.TokenDto;
+import com.api.microservice.microservice.domain.Login;
+import com.api.microservice.microservice.services.dto.TokenDto;
 import com.api.microservice.microservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class LoginController {
     UserService userService;
 
     @PostMapping(value = "login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<TokenDto> login(@RequestBody Login loginDto) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.loginUser(loginDto));
     }
 }
