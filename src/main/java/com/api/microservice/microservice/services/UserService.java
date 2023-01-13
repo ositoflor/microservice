@@ -1,5 +1,7 @@
 package com.api.microservice.microservice.services;
 
+import com.api.microservice.microservice.clients.UserClient;
+import com.api.microservice.microservice.dtos.LoginDto;
 import com.api.microservice.microservice.dtos.TokenDto;
 import com.api.microservice.microservice.jwt.JwtToken;
 import com.api.microservice.microservice.dtos.UserDto;
@@ -11,13 +13,20 @@ public class UserService {
     @Autowired
     JwtToken jwtToken;
 
-    public TokenDto loginUser(UserDto userDto) {
-       String token = jwtToken.generateToken(userDto);
+    @Autowired
+    UserClient userClient;
+
+    public TokenDto loginUser(LoginDto loginDto) {
+       UserDto user = userClient.loginUser(loginDto);
+       if (user == null) {
+           throw new RuntimeException("Usuário inválido");
+       }
+       String token = jwtToken.generateToken(user);
+
        return TokenDto.builder().type("Bearer").token(token).build();
     }
 
     public boolean validateToken(String token) {
-        System.out.print(token);
       return jwtToken.tokenValid(token);
     }
 

@@ -1,5 +1,6 @@
 package com.api.microservice.microservice.controllers;
 
+import com.api.microservice.microservice.dtos.LoginDto;
 import com.api.microservice.microservice.dtos.TokenDto;
 import com.api.microservice.microservice.dtos.UserDto;
 import com.api.microservice.microservice.services.UserService;
@@ -18,15 +19,15 @@ public class TokenController {
 
 
     @PostMapping
-    public ResponseEntity<TokenDto> loginUser(@RequestBody UserDto userDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.loginUser(userDto));
+    public ResponseEntity<TokenDto> loginUser(@RequestBody LoginDto loginDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.loginUser(loginDto));
     }
 
 
     @GetMapping(value = "/validatetoken")
     public boolean validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         String tkn =  token.split(" ")[1];
-        return true;
+        return userService.validateToken(tkn);
     }
 
     @GetMapping(value = "/typeuser")
