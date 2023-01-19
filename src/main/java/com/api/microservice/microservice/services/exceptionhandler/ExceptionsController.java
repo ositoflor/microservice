@@ -19,7 +19,7 @@ public class ExceptionsController {
 
     @ExceptionHandler(FeignException.class)
     public ResponseEntity handlerFeign(FeignException e) {
-        MessageExceptionHandler error = new MessageExceptionHandler(new Date(), HttpStatus.NOT_FOUND.value(), "E-mail ou senha invalido.");
+        MessageExceptionHandler error = new MessageExceptionHandler(new Date(), HttpStatus.NOT_FOUND.value(), "E-mail ou senha inválido.");
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
 }
