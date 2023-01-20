@@ -17,7 +17,7 @@ public class UserService {
     UserClient userClient;
 
     public TokenDto loginUser(Login loginDto) {
-       User user = userClient.loginUser(loginDto);
+       User user = userClient.login(loginDto);
        if (user == null) {
            throw new RuntimeException("Usuário inválido");
        }

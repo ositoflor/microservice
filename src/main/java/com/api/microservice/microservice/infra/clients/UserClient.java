@@ -2,14 +2,16 @@ package com.api.microservice.microservice.infra.clients;
 
 import com.api.microservice.microservice.domain.Login;
 import com.api.microservice.microservice.domain.User;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+@Component
+public class UserClient {
+    String URI = "http://localhost:8082/user/login";
+    RestTemplate restTemplate = new RestTemplate();
 
-@FeignClient(value = "feignUsers", url = "http://localhost:8082/user")
-public interface UserClient {
-
-    @PostMapping(value = "/login")
-    User loginUser(@RequestBody Login loginDto);
+    public User login(Login login){
+        var result = restTemplate.postForEntity(URI, login, User.class);
+        return result.getBody();
+    }
 
 }
