@@ -1,10 +1,10 @@
 package com.api.microservice.microservice.services.exceptionhandler;
 
-import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Date;
 
@@ -17,8 +17,8 @@ public class ExceptionsController {
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(FeignException.class)
-    public ResponseEntity handlerFeign(FeignException e) {
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity handlerFeign(HttpClientErrorException e) {
         MessageExceptionHandler error = new MessageExceptionHandler(new Date(), HttpStatus.NOT_FOUND.value(), "E-mail ou senha inválido.");
         return new ResponseEntity(error, HttpStatus.NOT_FOUND);
     }
