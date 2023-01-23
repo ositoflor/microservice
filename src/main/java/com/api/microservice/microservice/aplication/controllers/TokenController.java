@@ -1,6 +1,6 @@
 package com.api.microservice.microservice.aplication.controllers;
 
-import com.api.microservice.microservice.services.UserService;
+import com.api.microservice.microservice.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class TokenController {
 
     @Autowired
-    UserService userService;
+    private UserServiceImpl userService;
 
     @GetMapping(value = "/validatetoken")
     public boolean validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {

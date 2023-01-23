@@ -2,7 +2,7 @@ package com.api.microservice.microservice.aplication.controllers;
 
 import com.api.microservice.microservice.domain.Login;
 import com.api.microservice.microservice.services.dto.TokenDto;
-import com.api.microservice.microservice.services.UserService;
+import com.api.microservice.microservice.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    UserService userService;
+    private UserServiceImpl userService;
 
     @PostMapping(value = "login")
     public ResponseEntity<TokenDto> login(@RequestBody Login loginDto) {
